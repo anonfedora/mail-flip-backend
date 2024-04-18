@@ -139,7 +139,13 @@ const getAllUsers = catchAsync(async (req, res, next) => {
 });
 
 const sendMailToSingle = catchAsync(async (req, res, next) => {
+    const { receiver, subject, message } = req.body;
     try {
+        await sendEmail({
+            email: receiver,
+            subject: subject,
+            message: message
+        });
     } catch (error) {
         console.log(error);
         return next(new HttpError("Could not Mail user", 500));
@@ -147,7 +153,13 @@ const sendMailToSingle = catchAsync(async (req, res, next) => {
 });
 
 const sendMailToMultiple = catchAsync(async (req, res, next) => {
+    const { receivers, subject, message } = req.body;
     try {
+        await sendEmail({
+            email: receivers,
+            subject: subject,
+            message: message
+        });
     } catch (error) {
         console.log(error);
         return next(new HttpError("Could not Mail users", 500));
