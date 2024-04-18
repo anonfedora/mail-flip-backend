@@ -152,11 +152,19 @@ const sendMailToSingle = catchAsync(async (req, res, next) => {
     }
 });
 
+const toArray = (...value) => {
+    let array = value.toString().split(" ");
+    //array = value.toString().split(" ");
+    console.log(array);
+};
+
 const sendMailToMultiple = catchAsync(async (req, res, next) => {
     const { receivers, subject, message } = req.body;
+
+    let emails = toArray(receivers);
     try {
         await sendEmail({
-            email: receivers,
+            email: emails,
             subject: subject,
             message: message
         });
