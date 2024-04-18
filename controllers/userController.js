@@ -138,6 +138,22 @@ const getAllUsers = catchAsync(async (req, res, next) => {
     }
 });
 
+const sendMailToSingle = catchAsync(async (req, res, next) => {
+    try {
+    } catch (error) {
+        console.log(error);
+        return next(new HttpError("Could not Mail user", 500));
+    }
+});
+
+const sendMailToMultiple = catchAsync(async (req, res, next) => {
+    try {
+    } catch (error) {
+        console.log(error);
+        return next(new HttpError("Could not Mail users", 500));
+    }
+});
+
 const getUser = catchAsync(async (req, res, next) => {
     try {
         const userId = req.params.id;
@@ -393,5 +409,7 @@ export {
     logout,
     updatePassword,
     updateUserRole,
-    searchUser
+    searchUser,
+    sendMailToSingle,
+    sendMailToMultiple
 };

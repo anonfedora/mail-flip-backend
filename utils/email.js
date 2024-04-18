@@ -1,15 +1,18 @@
 import nodemailer from "nodemailer";
 import HTML_TEMPLATE from "./mail-template.js";
 
-const sendEmail = async (options) => {
+const sendEmail = async options => {
     const transporter = nodemailer.createTransport({
+        sendmail: true,
+        newline: "unix",
+        path: "/usr/sbin/sendmail",
         service: process.env.SERVICE,
         host: process.env.EMAIL_HOST,
         auth: {
             user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASSWORD,
+            pass: process.env.EMAIL_PASSWORD
         }
-    })
+    });
 
     //Emails options
     let mailOptions = {
@@ -17,11 +20,10 @@ const sendEmail = async (options) => {
         to: options.email,
         subject: options.subject,
         text: options.message,
-        html: HTML_TEMPLATE(options.message),
-    }
-
+        html: HTML_TEMPLATE(options.message)
+    };
 
     await transporter.sendMail(mailOptions);
-}
+};
 
 export { sendEmail };
