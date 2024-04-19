@@ -12,7 +12,9 @@ import {
     logout,
     updatePassword,
     updateUserRole,
-    searchUser
+    searchUser,
+    sendMailToSingle,
+    sendMailToMultiple
 } from "../controllers/userController.js";
 
 //TODO - import { requireSignIn } from "../helpers/authHelpers.js";
@@ -31,8 +33,13 @@ router
     .delete(isAuthenticatedUser, authorizeRoles("community-admin"), deleteUser);
 router
     .route("/assign-role/:id")
-    .put(isAuthenticatedUser, authorizeRoles("community-admin"), updateUserRole);
-router.get("/logout", logout);
+    .put(
+        isAuthenticatedUser,
+        authorizeRoles("community-admin"),
+        updateUserRole
+    );
+router.post("/mail-send-single", sendMailToSingle);
+router.post("/mail-send-multiple", sendMailToMultiple);
 router.get("/me/search", searchUser);
 
 export default router;
