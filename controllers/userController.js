@@ -161,10 +161,10 @@ const toArray = (...value) => {
 const sendMailToMultiple = catchAsync(async (req, res, next) => {
     const { receivers, subject, message } = req.body;
     console.log(receivers, subject, message);
-    let emails = toArray(receivers);
+    
     try {
         await sendEmail({
-            email: emails,
+            email: receivers,
             subject: subject,
             message: message
         });
