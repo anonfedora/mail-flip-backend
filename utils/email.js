@@ -3,9 +3,6 @@ import HTML_TEMPLATE from "./mail-template.js";
 
 const sendEmail = async options => {
     const transporter = nodemailer.createTransport({
-        sendmail: true,
-        newline: "unix",
-        path: "/usr/sbin/sendmail",
         service: process.env.SERVICE,
         host: process.env.EMAIL_HOST,
         auth: {
