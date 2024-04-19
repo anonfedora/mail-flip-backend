@@ -140,9 +140,10 @@ const getAllUsers = catchAsync(async (req, res, next) => {
 
 const sendMailToSingle = catchAsync(async (req, res, next) => {
     const { email, subject, message } = req.body;
+    console.log(email, subject, message);
     try {
         await sendEmail({
-            email,
+            email: email,
             subject: subject,
             message: message
         });
@@ -159,7 +160,7 @@ const toArray = (...value) => {
 
 const sendMailToMultiple = catchAsync(async (req, res, next) => {
     const { receivers, subject, message } = req.body;
-
+    console.log(receivers, subject, message);
     let emails = toArray(receivers);
     try {
         await sendEmail({
