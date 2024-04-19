@@ -38,8 +38,8 @@ router
         authorizeRoles("community-admin"),
         updateUserRole
     );
-router.post("/mail-send-single", sendMailToSingle);
-router.post("/mail-send-multiple", sendMailToMultiple);
+router.post("/mail-send-single", isAuthenticatedUser, sendMailToSingle);
+router.post("/mail-send-multiple", isAuthenticatedUser, sendMailToMultiple);
 router.get("/me/search", searchUser);
 
 export default router;
